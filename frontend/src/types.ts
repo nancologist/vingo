@@ -1,15 +1,15 @@
-import { connect } from 'redux-thunk'
-import { DiceState } from './store/dice/types';
+import { connect } from 'react-redux';
+// import { DiceState } from './store/dice/types';
 
-export default connector = connect(mapStateToProps, mapDispatchToProps)
+// export default connector = connect(mapStateToProps, mapDispatchToProps)
 
-export interface AppProps {
+// export interface AppProps {
 
-}
+// }
 
-const mapStateToProps = (state: DiceState) => ({
+// const mapStateToProps = (state: DiceState) => ({
 
-});
+// });
 
-const mapDispatchToProps = () => {
-};
+// const mapDispatchToProps = () => {
+// };
