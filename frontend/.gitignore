@@ -24,3 +24,5 @@ yarn-error.log*
 
 # Mori: VScode folder structuring
 **/newfolder/
+
+**/.vscode
