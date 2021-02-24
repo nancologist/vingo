@@ -2,11 +2,3 @@
   text-align: center;
   padding: 5px;
 }
-
-.squares {
-  box-shadow: rgba(0, 0, 0, 0.25) 1px 3px 5px;
-  display: grid;
-  grid-template-columns: repeat(5, 20%);
-  margin: auto;
-  width: fit-content;
-}
