@@ -3,7 +3,7 @@ import './Square.css';
 import { Props } from './types';
 
 const Square: FC<Props> = (props) => {
-    const { text } = props;
+    const { text, x, y } = props;
     return (
         <div className="square">{text}</div>
     )

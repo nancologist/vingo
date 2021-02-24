@@ -1,6 +1,7 @@
 .square {
     align-items: center;
     border: 1px solid #ccc;
+    cursor: pointer;
     display: inline-flex;
     font-size: 12px;
     height: 80px; width: 80px;

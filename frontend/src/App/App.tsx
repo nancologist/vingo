@@ -9,8 +9,8 @@ function App() {
       <h1>Let's play Vingo!</h1>
       <div className="squares">
         {texts.map((text, index) => {
-          const y = Math.floor( index / 5 );
           const x = index % 5;
+          const y = Math.floor( index / 5 );
           return <Square text={text} x={x} y={y} key={index} />;
         })}
       </div>
