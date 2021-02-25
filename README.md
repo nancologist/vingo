@@ -1,7 +1,8 @@
 # Vingo
 Etymology: Video Conference Bingo => Vingo
 
-## 1. Build Project
+## 1. Run Project
+0. ``git clone https://github.com/nancologist/vingo.git``
 1. ``cd server/``
 2. ``npm install``
 3. ``npm start``
