@@ -1,31 +1,23 @@
 import { FC, useState } from 'react';
+
+import './Squares.css';
 import { texts } from '../../data/data';
 import { Axis } from './types';
 import Square from './square/Square';
-import './Squares.css';
+import axiosInstance from '../../axios/axios';
 
 const Squares: FC = () => {
     const [ , setAxisCount] = useState<Axis>({
-        xAxis: [], yAxis: [], diag1: 1, diag2: 1
+        xAxis: [0, 0, 1, 0, 0], yAxis: [0, 0, 1, 0, 0], diag1: 1, diag2: 1
     });
 
     const handleSquareClick = (x: number, y: number) => {
 
-        // Send with axios POST req:
-
+        axiosInstance.post('/square/coords', { x, y });
         
         setAxisCount(prev => {
-            if (!prev.xAxis[x]) {
-                prev.xAxis[x] = 1;
-            } else {
-                prev.xAxis[x]++;
-            }
-
-            if (!prev.yAxis[y]) {
-                prev.yAxis[y] = 1;
-            } else {
-                prev.yAxis[y]++;
-            }
+            prev.xAxis[x]++;
+            prev.yAxis[y]++;
 
             if ( x === y ) {
                 prev.diag1++;
