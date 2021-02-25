@@ -2,10 +2,13 @@
 Etymology: Video Conference Bingo => Vingo
 
 ## 1. Build Project
-1. backend ...
-1. ``cd frontend/``
+1. ``cd server/``
 2. ``npm install``
 3. ``npm start``
+4. Open a second terminal.
+5. ``cd client/``
+6. ``npm install``
+7. ``npm start``
 
 ___
 
