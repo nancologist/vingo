@@ -1,49 +1,21 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 
 import './Squares.css';
 import { texts } from '../../data/data';
 import { Axis } from './types';
 import Square from './square/Square';
-import { isWinner } from './utils';
+import { isWinner, initialState } from './utils';
 
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:8080/');
+export const socket = openSocket('http://localhost:8080/');
 
 const Squares: FC = () => {
-    const [ , setCount] = useState<Axis>({
-        xAxis: [0, 0, 1, 0, 0], yAxis: [0, 0, 1, 0, 0], diag1: 1, diag2: 1
-    });
-
-    useEffect(() => {
-        socket.on('OPP_SQUARE', (m: number, n: number) => {
-            console.log(m, n)
-            // Gray out the square which opponent has token.
-        })
-    }, [])
+    const [ , setCount] = useState<Axis>(initialState);
 
     const handleSquareClick = (x: number, y: number) => {
-
         socket.emit('TAKE_SQUARE', x, y);
-        
         setCount(prev => {
-            
             isWinner(prev, x, y);
-            // import isWinner from './utils.ts':
-            // prev.xAxis[x]++;
-            // prev.yAxis[y]++;
-            // if ( x === y ) {
-            //     prev.diag1++;
-            // } else if ( x + y === 4 ) {
-            //     prev.diag2++;
-            // }
-            // if (
-            //     prev.xAxis[x] === 5 || prev.yAxis[y] === 5
-            //     || prev.diag1 === 5 || prev.diag2 === 5
-            // ) {
-            //     console.log('YOU WIN!!!');
-            // }
-            // ----------------------------------
-
             return prev;
         });
 
@@ -55,7 +27,7 @@ const Squares: FC = () => {
                 const x = index % 5;
                 const y = Math.floor(index / 5);
                 return (
-                    <Square 
+                    <Square
                         text={text} x={x} y={y} key={index}
                         clicked={handleSquareClick}
                     />

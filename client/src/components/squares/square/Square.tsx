@@ -2,9 +2,22 @@ import { FC, useEffect, useState } from 'react';
 import './Square.css';
 import { Props } from './types';
 
-const Square: FC<Props> = (props) => {
+import { socket } from '../Squares';
+
+const Square: FC<Props>  = (props) => {
     const { text, x, y } = props;
     const [classes, setClasses] = useState(['square'])
+
+    useEffect(() => {
+        socket.on('OPP_SQUARE', (m: number, n: number) => {
+            setClasses(prev => {
+                if (m === x && n === y && prev.length < 2) {
+                    return [ ...prev, 'square--opponent' ]
+                }
+                return prev;
+            });
+        })
+    }, [x, y])
 
     useEffect(() => {
         const isCenter = x === 2 && y ===2;

@@ -19,3 +19,9 @@ export function isWinner(state: Axis, x: number, y: number): boolean {
         return false;
     }
 }
+
+export const initialState = {
+    xAxis: [0, 0, 1, 0, 0],
+    yAxis: [0, 0, 1, 0, 0],
+    diag1: 1, diag2: 1
+}
