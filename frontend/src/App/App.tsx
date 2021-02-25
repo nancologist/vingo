@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Squares from '../components/squares/Squares';
 import './App.css';
 
-// import openSocket from 'socket.io-client';
+
 
 function App() {
 
-  // useEffect(() => {
-  //   const socket = openSocket('http://localhost:8080');
-  // }, []);
+  useEffect(() => {
+    // const socket = openSocket('http://localhost:8080/');
+    // socket.on('coord', (data: any) => {
+    //   if (data.action === 'post') {
+    //     setX(data.coord.x)
+    //   }
+    // })
+  }, []);
 
   return (
     <div className="App">
