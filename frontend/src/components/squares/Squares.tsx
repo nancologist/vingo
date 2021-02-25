@@ -4,41 +4,46 @@ import './Squares.css';
 import { texts } from '../../data/data';
 import { Axis } from './types';
 import Square from './square/Square';
-// import axiosInstance from '../../axios/axios';
+import { isWinner } from './utils';
 
 import openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:8080/');
 
 const Squares: FC = () => {
-    const [ , setAxisCount] = useState<Axis>({
+    const [ , setCount] = useState<Axis>({
         xAxis: [0, 0, 1, 0, 0], yAxis: [0, 0, 1, 0, 0], diag1: 1, diag2: 1
     });
 
     useEffect(() => {
-        socket.on('OPP_SQUARE', (m: number, n: number) => { console.log(m, n) })
+        socket.on('OPP_SQUARE', (m: number, n: number) => {
+            console.log(m, n)
+            // Gray out the square which opponent has token.
+        })
     }, [])
 
     const handleSquareClick = (x: number, y: number) => {
 
-        // axiosInstance.post('/square/coords', { x, y });
         socket.emit('TAKE_SQUARE', x, y);
         
-        setAxisCount(prev => {
-            prev.xAxis[x]++;
-            prev.yAxis[y]++;
+        setCount(prev => {
+            
+            isWinner(prev, x, y);
+            // import isWinner from './utils.ts':
+            // prev.xAxis[x]++;
+            // prev.yAxis[y]++;
+            // if ( x === y ) {
+            //     prev.diag1++;
+            // } else if ( x + y === 4 ) {
+            //     prev.diag2++;
+            // }
+            // if (
+            //     prev.xAxis[x] === 5 || prev.yAxis[y] === 5
+            //     || prev.diag1 === 5 || prev.diag2 === 5
+            // ) {
+            //     console.log('YOU WIN!!!');
+            // }
+            // ----------------------------------
 
-            if ( x === y ) {
-                prev.diag1++;
-            } else if ( x + y === 4 ) {
-                prev.diag2++;
-            }
-
-            if (
-                prev.xAxis[x] === 5 || prev.yAxis[y] === 5
-                || prev.diag1 === 5 || prev.diag2 === 5
-            ) {
-                console.log('YOU WIN!!!');
-            }
             return prev;
         });
 
