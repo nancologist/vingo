@@ -1,6 +1,5 @@
 import { FC, useState } from 'react';
 import { texts } from '../../data/data';
-
 import { Axis } from './types';
 import Square from './square/Square';
 import './Squares.css';
@@ -11,6 +10,10 @@ const Squares: FC = () => {
     });
 
     const handleSquareClick = (x: number, y: number) => {
+
+        // Send with axios POST req:
+
+        
         setAxisCount(prev => {
             if (!prev.xAxis[x]) {
                 prev.xAxis[x] = 1;
@@ -36,9 +39,9 @@ const Squares: FC = () => {
             ) {
                 console.log('YOU WIN!!!');
             }
-
             return prev;
-        })
+        });
+
     };
 
     return (
