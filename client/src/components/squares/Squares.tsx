@@ -13,7 +13,7 @@ const Squares: FC = () => {
     const handleSquareClick = (x: number, y: number) => {
         socket.emit('TAKE_SQUARE', x, y);
         setCount(prev => {
-            isWinner(prev, x, y);
+            const shouldCelebrate = isWinner(prev, x, y);
             return prev;
         });
 

@@ -4,14 +4,16 @@ import Squares from '../components/squares/Squares';
 import { socket } from '../socket/socket';
 import './App.css';
 
-
-
 function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [oppName, setOppName] = useState('')
 
   useEffect(() => {
+    const storedName = sessionStorage.getItem('oppName');
+    if (!!storedName) setOppName(storedName);
+
     socket.on('OPP_NAME', (name: string) => {
+      sessionStorage.setItem('oppName', name);
       setOppName(name);
     })
   }, []);
