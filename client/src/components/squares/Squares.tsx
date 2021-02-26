@@ -5,9 +5,7 @@ import { texts } from '../../data/data';
 import { Axis } from './types';
 import Square from './square/Square';
 import { isWinner, initialState } from './utils';
-
-import openSocket from 'socket.io-client';
-export const socket = openSocket('http://localhost:8080/');
+import { socket } from '../../socket/socket';
 
 const Squares: FC = () => {
     const [ , setCount] = useState<Axis>(initialState);

@@ -15,7 +15,7 @@
 } */
 
 .square--selected {
-    background-color: rgb(173, 5, 5);
+    background-color: rgb(173, 5, 5) !important;
     pointer-events: none;
     color: #fff;
     text-decoration: line-through;
@@ -23,4 +23,7 @@
 
 .square--opponent {
     background-color: #777;
+    color: #fff;
+    pointer-events: none;
+    text-decoration: line-through;
 }

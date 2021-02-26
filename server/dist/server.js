@@ -30,9 +30,11 @@ const io = require("socket.io")(httpServer, {
     },
 });
 io.on('connection', (socket) => {
-    console.log('A client is connected.');
     socket.on('TAKE_SQUARE', (x, y) => {
         // OPP: abbreviation for Opponent
         socket.broadcast.emit('OPP_SQUARE', x, y);
+    });
+    socket.on('SET_NAME', (name) => {
+        socket.broadcast.emit('OPP_NAME', name);
     });
 });

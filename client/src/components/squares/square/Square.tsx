@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import './Square.css';
 import { Props } from './types';
 
-import { socket } from '../Squares';
+import { socket } from '../../../socket/socket';
 
 const Square: FC<Props>  = (props) => {
     const { text, x, y } = props;
