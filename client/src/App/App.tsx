@@ -9,7 +9,6 @@ function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [oppName, setOppName] = useState('');
   const [intervalIds, setIntervalIds] = useState([] as NodeJS.Timeout[])
-  // const [intervalId, setIntervalId] = useState(null as NodeJS.Timeout | null);
 
   useEffect(() => {
     const storedName = sessionStorage.getItem('oppName');
