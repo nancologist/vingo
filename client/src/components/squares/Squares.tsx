@@ -2,21 +2,21 @@ import { FC, useState } from 'react';
 
 import './Squares.css';
 import { texts } from '../../data/data';
-import { Axis } from './types';
+import { Axis, Props } from './types';
 import Square from './square/Square';
 import { isWinner, initialState } from './utils';
 import { socket } from '../../socket/socket';
 
-const Squares: FC = () => {
+const Squares: FC<Props> = (props) => {
     const [ , setCount] = useState<Axis>(initialState);
 
     const handleSquareClick = (x: number, y: number) => {
         socket.emit('TAKE_SQUARE', x, y);
         setCount(prev => {
             const shouldCelebrate = isWinner(prev, x, y);
+            if (shouldCelebrate) props.haveWinner();
             return prev;
         });
-
     };
 
     return (

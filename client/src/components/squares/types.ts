@@ -4,3 +4,7 @@ export interface Axis {
     diag1: number;
     diag2: number;
 }
+
+export interface Props {
+    haveWinner: () => void;
+}

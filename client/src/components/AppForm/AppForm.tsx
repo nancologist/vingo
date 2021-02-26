@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState, FormEvent } from 'react';
+import { FC, useState, FormEvent } from 'react';
 import { socket } from '../../socket/socket';
 import { Props } from './types';
 
@@ -8,7 +8,8 @@ const AppForm: FC<Props> = (props) => {
         setName(event.currentTarget.value);
     };
 
-    const submitForm = () => {
+    const submitForm = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         socket.emit('SET_NAME', name);
         props.submitted()
     };

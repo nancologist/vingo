@@ -7,7 +7,9 @@ import './App.css';
 
 function App() {
   const [gameStarted, setGameStarted] = useState(false);
-  const [oppName, setOppName] = useState('')
+  const [oppName, setOppName] = useState('');
+  const [intervalIds, setIntervalIds] = useState([] as NodeJS.Timeout[])
+  // const [intervalId, setIntervalId] = useState(null as NodeJS.Timeout | null);
 
   useEffect(() => {
     const storedName = sessionStorage.getItem('oppName');
@@ -19,15 +21,23 @@ function App() {
     })
   }, []);
 
+  useEffect(() => {
+    document.body.addEventListener('click', (event: Event) => {
+      intervalIds.forEach(id => { clearInterval(id) });
+      (event.currentTarget as HTMLElement).style.backgroundColor = '#eee';
+    })
+  }, [intervalIds]);
+
   const startGame = () => {
     setGameStarted(true);
   }
 
   const celebrate = () => {
     celebrationColors.forEach((color, i) => {
-      setInterval(() => {
+      const id = setInterval(() => {
         document.body.style.backgroundColor = color;
       }, 300 * (i + 1));
+      setIntervalIds((prev: NodeJS.Timeout[]) => [ ...prev, id ]);
     })
   };
 

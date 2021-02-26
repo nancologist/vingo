@@ -1,23 +1,18 @@
 import { Axis } from "./types";
 
+const DIAG_SUM = 4;
+const WIN_NUM = 5
+
 export function isWinner(state: Axis, x: number, y: number): boolean {
     state.xAxis[x]++;
     state.yAxis[y]++;
     if ( x === y ) {
         state.diag1++;
-    } else if ( x + y === 4 ) {
+    } else if ( x + y === DIAG_SUM ) {
         state.diag2++;
     }
     
-    if (
-        state.xAxis[x] === 5 || state.yAxis[y] === 5
-        || state.diag1 === 5 || state.diag2 === 5
-    ) {
-        console.log('YOU WIN!!!');
-        return true;
-    } else {
-        return false;
-    }
+    return state.xAxis[x] === WIN_NUM || state.yAxis[y] === WIN_NUM || state.diag1 === WIN_NUM || state.diag2 === WIN_NUM;
 }
 
 export const initialState = {
