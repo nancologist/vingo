@@ -2,6 +2,6 @@
     box-shadow: rgba(0, 0, 0, 0.25) 1px 3px 5px;
     display: grid;
     grid-template-columns: repeat(5, 20%);
-    margin: auto;
+    margin: 20px auto 20px auto;
     width: fit-content;
 }

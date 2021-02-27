@@ -1,6 +1,7 @@
 import { FC, useState, FormEvent } from 'react';
 import { socket } from '../../socket/socket';
 import { Props } from './types';
+import './AppForm.css';
 
 const AppForm: FC<Props> = (props) => {
     const [name, setName] = useState('');
@@ -9,18 +10,25 @@ const AppForm: FC<Props> = (props) => {
     };
 
     const submitForm = (event: FormEvent<HTMLFormElement>) => {
+        if (!name) {
+            alert('Choose a player name first!')
+            return;
+        }
         event.preventDefault();
         socket.emit('SET_NAME', name);
         props.submitted()
     };
 
     return (
-        <form className="app-form" onSubmit={submitForm}>
-            <input 
+        <form className="app__form" onSubmit={submitForm}>
+            <input
+                className="app__form__input"
                 type="text" value={name} onChange={handleInput}
-                placeholder="Choose a name..."
-            /> 
-            <button type="submit">GO!</button>
+                placeholder="Player Name"
+                onFocus={(e) => e.target.placeholder = ""}
+                onBlur={(e) => e.target.placeholder = "Player Name"}
+            />
+            <button type="submit" className="app__form__btn">Enter</button>
         </form>
     )
 };

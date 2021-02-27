@@ -1,3 +1,12 @@
 .App {
+  display: inline;
+  height: 500px;
+  left: 0; right: 0; top: 50%;
+  position: absolute;
   text-align: center;
+  transform: translateY(-250px);
+}
+
+.app__title {
+  padding: 10px;
 }

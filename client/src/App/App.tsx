@@ -1,26 +1,25 @@
-import { Fragment, useEffect, useState, MouseEvent } from 'react';
+import { Fragment, useState, MouseEvent, useEffect } from 'react';
 import AppForm from '../components/AppForm/AppForm';
 import Squares from '../components/squares/Squares';
 import Modal from '../components/Modal/Modal';
-import { socket } from '../socket/socket';
+
 import { celebrationColors } from './data';
 import './App.css';
+import PlayerName from '../components/PlayerName/PlayerName';
+import { socket } from '../socket/socket';
 
 function App() {
   const [gameStarted, setGameStarted] = useState(false);
-  const [oppName, setOppName] = useState('');
   const [intervalIds, setIntervalIds] = useState([] as NodeJS.Timeout[])
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
-    const storedName = sessionStorage.getItem('oppName');
-    if (!!storedName) setOppName(storedName);
-
     socket.on('OPP_NAME', (name: string) => {
-      sessionStorage.setItem('oppName', name);
-      setOppName(name);
+      if (name !== '') {
+        sessionStorage.setItem('oppName', name);
+      }
     })
-  }, []);
+  }, [])
 
   const startGame = () => {
     setGameStarted(true);
@@ -49,17 +48,14 @@ function App() {
     content = 
       <Fragment>
         <Squares haveWinner={celebrate}/>
-        <h3>You vs {
-          oppName ? oppName:
-          <span style={{ color: '#888'}}>waiting...</span>
-        }</h3>
+        <PlayerName />
         { modalOpen ? <Modal text={'YOU WIN!'} clicked={closeModal} /> : null }
       </Fragment>
   }
 
   return (
     <div className="App" >
-      <h1>Vingo!</h1>
+      <h1 className="app__title">Vingo!</h1>
       { content }
     </div>
   );
