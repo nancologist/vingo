@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
 import AppForm from '../components/AppForm/AppForm';
 import Squares from '../components/squares/Squares';
+import Modal from '../components/Modal/Modal';
 import { socket } from '../socket/socket';
 import { celebrationColors } from './data';
 import './App.css';
@@ -49,6 +50,7 @@ function App() {
           oppName ? oppName:
           <span style={{ color: '#888'}}>waiting...</span>
         }</h3>
+        <Modal text={'YOU WIN!'} />
       </Fragment>
   }
 
