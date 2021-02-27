@@ -49,15 +49,17 @@ function App() {
       <Fragment>
         <Squares haveWinner={celebrate}/>
         <PlayerName />
-        { modalOpen ? <Modal text={'YOU WIN!'} clicked={closeModal} /> : null }
       </Fragment>
   }
 
   return (
-    <div className="App" >
-      <h1 className="app__title">Vingo!</h1>
-      { content }
-    </div>
+    <Fragment>
+      <div className="App" >
+        <h1 className="app__title">Vingo!</h1>
+        { content }
+      </div>
+      { modalOpen ? <Modal text={'YOU WIN!'} clicked={closeModal} /> : null }
+    </Fragment>
   );
 }
 
