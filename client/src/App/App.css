@@ -7,6 +7,13 @@
 }
 
 .app__title {
+  display: block;
   padding: 10px;
   text-align: center;
+}
+
+@media (max-height: 550px) {
+  .App--started {
+    flex-direction: row;
+  }
 }
