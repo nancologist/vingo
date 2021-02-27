@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState, MouseEvent } from 'react';
 import AppForm from '../components/AppForm/AppForm';
 import Squares from '../components/squares/Squares';
 import Modal from '../components/Modal/Modal';
@@ -10,6 +10,7 @@ function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [oppName, setOppName] = useState('');
   const [intervalIds, setIntervalIds] = useState([] as NodeJS.Timeout[])
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const storedName = sessionStorage.getItem('oppName');
@@ -21,24 +22,26 @@ function App() {
     })
   }, []);
 
-  useEffect(() => {
-    document.body.addEventListener('click', (event: Event) => {
-      intervalIds.forEach(id => { clearInterval(id) });
-      (event.currentTarget as HTMLElement).style.backgroundColor = '#eee';
-    })
-  }, [intervalIds]);
-
   const startGame = () => {
     setGameStarted(true);
   }
 
   const celebrate = () => {
+    setModalOpen(true);
     celebrationColors.forEach((color, i) => {
       const id = setInterval(() => {
         document.body.style.backgroundColor = color;
       }, 300 * (i + 1));
       setIntervalIds((prev: NodeJS.Timeout[]) => [ ...prev, id ]);
     })
+  };
+
+  const closeModal = (event: MouseEvent<HTMLDivElement>) => {
+    setModalOpen(false);
+
+    // Stop Animation:
+    intervalIds.forEach(id => { clearInterval(id) });
+    document.body.style.backgroundColor = '#eee';
   };
 
   let content = <AppForm submitted={startGame} />
@@ -50,7 +53,7 @@ function App() {
           oppName ? oppName:
           <span style={{ color: '#888'}}>waiting...</span>
         }</h3>
-        <Modal text={'YOU WIN!'} />
+        { modalOpen ? <Modal text={'YOU WIN!'} clicked={closeModal} /> : null }
       </Fragment>
   }
 

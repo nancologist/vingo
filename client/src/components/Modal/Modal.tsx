@@ -3,9 +3,9 @@ import { Props } from './types';
 import './Modal.css';
 
 const Modal: FC<Props> = (props) => {
-    const { text } = props;
+    const { text, clicked } = props;
     return (
-        <div className="modal-bg">
+        <div className="modal-bg" onClick={clicked} >
             <div className="modal">
                 {text}
             </div>
