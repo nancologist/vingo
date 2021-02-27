@@ -1,7 +1,10 @@
+import fs from 'fs';
+import path from 'path';
 import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import { Socket } from 'socket.io';
-// import router from './routes/routes';
+import helmet from 'helmet';
+import morgan from 'morgan';
 
 const app = express();
 app.use(bodyParser.json());
@@ -14,20 +17,28 @@ app.use((req, res, next) => {
     next();
 });
 
+const accessLogStream = fs.createWriteStream(
+    path.join(__dirname, 'access.log'),
+    { flags: 'a' }
+);
 
-// app.use('/', router);
+app.use(helmet());
+app.use(morgan('combined', { stream: accessLogStream }))
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     res.status(500).json({ message: err.message });
 });
 
-const httpServer = app.listen(8080, () => {
-    console.log('Listening on port 8080');
+const PORT = process.env.PORT || 8080;
+const CLIENT_SERVER = process.env.CLIENT_SERVER || 'http://localhost:3000';
+
+const httpServer = app.listen(PORT, () => {
+    console.log(`Vingo-Server: Listening on port ${PORT}`);
 });
 
 const io = require("socket.io")(httpServer, {
     cors: {
-    origin: "http://localhost:3000",
+    origin: CLIENT_SERVER,
     methods: ["GET", "POST"],
     credentials: true
     },

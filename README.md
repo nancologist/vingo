@@ -21,6 +21,10 @@ ___
 
 ### 2.2. Server
 
+### 2.3. Deployment
+* Securing Response Headers: ``helmet``
+* Logging: ``morgan`` + ``@types/morgan``
+
 ___
 
 ## 3. Author Notes
