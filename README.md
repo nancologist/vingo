@@ -1,6 +1,20 @@
 # Vingo
-Etymology: Video Conference Bingo => Vingo
+Start the [app](https://nuxt-blog-a2eb4.web.app/)!   
+Etymology: Video Conference Bingo => Vingo  
 Author: Morteza Jalilifar
+
+## 0. Hosting:
+
+* Client:
+    * Open on: https://nuxt-blog-a2eb4.web.app/
+    * Deployed on Firebase
+
+* Server:
+    * Deployed on Heroku.com
+    * Open on: https://vingo-server.herokuapp.com/ (__But__ you will get an "Cannot GET /" error because the server is supposed to only support websocket connections with client.)
+    * Env. Vars:
+        * ``CLIENT_SERVER`` : Allowing CORS for connection with client in Socket.io v3 initializer.
+        * ``PORT`` : Not set.
 
 ## 1. Run Project
 0. ``git clone https://github.com/nancologist/vingo.git``
@@ -17,9 +31,12 @@ ___
 ## 2. Dependencies
 
 ### 2.1. Client
-* Core: ``create-react-app . --template typescript``
+* Core Boilerplate: ``create-react-app . --template typescript``
+* Websocket (client-side): ``socket.io-client``
 
 ### 2.2. Server
+* Server: ``nodejs`` + ``express``
+* Websocket (server-side): ``socket.io``
 
 ### 2.3. Deployment
 * Securing Response Headers: ``helmet``
@@ -32,12 +49,4 @@ ___
 
 
 ## 4. Sources
-Purple Family Color:
-
-#431D53
-#4F2271
-#512989
-#DE6EA1
-#9F2B67
-
-Quelle: https://www.schemecolor.com/the-purple-family.php
+* Purple Family Color: https://www.schemecolor.com/the-purple-family.php
